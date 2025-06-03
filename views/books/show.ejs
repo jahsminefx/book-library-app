@@ -1,0 +1,45 @@
+<%- include('../partials/header', { title: item.title }) %>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h2 class="card-title"><%= item.title %></h2>
+        <h5 class="card-subtitle mb-3 text-muted">
+          by <%= item.author ? item.author.name : 'Unknown' %>
+          <% if (item.publicationYear) { %>
+            (<%= item.publicationYear %>)
+          <% } %>
+        </h5>
+        
+        <% if (item.isbn) { %>
+          <p class="card-text"><strong>ISBN:</strong> <%= item.isbn %></p>
+        <% } %>
+
+        <% if (user && user.role === 'admin') { %>
+          <div class="mt-4">
+            <a href="/books/<%= item.id %>/edit" class="btn btn-warning me-2">Edit</a>
+            <form action="/books/<%= item.id %>?_method=DELETE" method="POST" class="d-inline">
+              <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+            </form>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <% if (item.author && item.author.bio) { %>
+      <div class="card">
+        <div class="card-header">
+          <h5>About the Author</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= item.author.bio %></p>
+          <a href="/authors/<%= item.author.id %>" class="btn btn-sm btn-outline-primary">View Author</a>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

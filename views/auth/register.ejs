@@ -1,0 +1,72 @@
+<%- include('../partials/header', { title: 'Register' }) %>
+
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Create an Account</h2>
+
+  <% if (error_msg) { %>
+    <div class="alert alert-danger"><%= error_msg %></div>
+  <% } %>
+  <% if (success_msg) { %>
+    <div class="alert alert-success"><%= success_msg %></div>
+  <% } %>
+
+  <form action="/auth/register" method="POST" novalidate>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input 
+        type="text" 
+        class="form-control <% if (errors) { if (errors.find(e => e.param === 'username')) { %>is-invalid<% } } %>" 
+        id="username" 
+        name="username" 
+        value="<%= typeof old !== 'undefined' ? old.username : '' %>">
+      <% if (errors) { const err = errors.find(e => e.param === 'username'); if (err) { %>
+        <div class="invalid-feedback"><%= err.msg %></div>
+      <% } } %>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input 
+        type="email" 
+        class="form-control <% if (errors) { if (errors.find(e => e.param === 'email')) { %>is-invalid<% } } %>" 
+        id="email" 
+        name="email" 
+        value="<%= typeof old !== 'undefined' ? old.email : '' %>">
+      <% if (errors) { const err = errors.find(e => e.param === 'email'); if (err) { %>
+        <div class="invalid-feedback"><%= err.msg %></div>
+      <% } } %>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input 
+        type="password" 
+        class="form-control <% if (errors) { if (errors.find(e => e.param === 'password')) { %>is-invalid<% } } %>" 
+        id="password" 
+        name="password">
+      <% if (errors) { const err = errors.find(e => e.param === 'password'); if (err) { %>
+        <div class="invalid-feedback"><%= err.msg %></div>
+      <% } } %>
+    </div>
+
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label">Confirm Password</label>
+      <input 
+        type="password" 
+        class="form-control <% if (errors) { if (errors.find(e => e.param === 'confirmPassword')) { %>is-invalid<% } } %>" 
+        id="confirmPassword" 
+        name="confirmPassword">
+      <% if (errors) { const err = errors.find(e => e.param === 'confirmPassword'); if (err) { %>
+        <div class="invalid-feedback"><%= err.msg %></div>
+      <% } } %>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Register</button>
+  </form>
+
+  <div class="mt-3 text-center">
+    <p>Already have an account? <a href="/auth/login">Login</a></p>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

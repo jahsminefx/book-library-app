@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<h2>Book Library</h2>
+<a href="/books/new">Add New Book</a>
+
+<% if (books.length === 0) { %>
+    <p>No books found.</p>
+<% } else { %>
+    <ul>
+        <% books.forEach(book => { %>
+            <li>
+                <strong><%= book.title %></strong> by <%= book.author %><br>
+                <%= book.description %><br>
+                <a href="/books/update/<%= book.id %>">Edit</a> |
+                <form action="/books/delete/<%= book.id %>?_method=DELETE" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+<% } %>
+
+<%- include('partials/footer') %>

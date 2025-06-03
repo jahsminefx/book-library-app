@@ -1,0 +1,63 @@
+Solo Leveling style
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #0a0a23, #1a1a40);
+  color: #f1f1f1;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  color: #000000;
+}
+
+a {
+  color: #57a6ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+form {
+  background-color: #7272aa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+input, textarea, button {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+input, textarea {
+  background-color: #aeaebd;
+  color: #fff;
+}
+
+button {
+  background-color: #01234b;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 15px;
+  border: none;
+}
+
+button:hover {
+  background-color: #000000;
+}

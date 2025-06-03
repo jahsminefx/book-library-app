@@ -1,0 +1,44 @@
+<%- include('../partials/header', { title: 'Login' }) %>
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="mb-0">Login</h4>
+      </div>
+      <div class="card-body">
+        <% if (success_msg) { %>
+          <div class="alert alert-success"><%= success_msg %></div>
+        <% } %>
+        <% if (error_msg) { %>
+          <div class="alert alert-danger"><%= error_msg %></div>
+        <% } %>
+        <form action="/auth/login" method="POST">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control <%= errors && errors.find(e => e.param === 'username') ? 'is-invalid' : '' %>" 
+                   id="username" name="username" required>
+            <% if (errors && errors.find(e => e.param === 'username')) { %>
+              <div class="invalid-feedback">
+                <%= errors.find(e => e.param === 'username').msg %>
+              </div>
+            <% } %>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control <%= errors && errors.find(e => e.param === 'password') ? 'is-invalid' : '' %>" 
+                   id="password" name="password" required>
+            <% if (errors && errors.find(e => e.param === 'password')) { %>
+              <div class="invalid-feedback">
+                <%= errors.find(e => e.param === 'password').msg %>
+              </div>
+            <% } %>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

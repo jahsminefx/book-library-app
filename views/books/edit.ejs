@@ -1,0 +1,41 @@
+<%- include('../partials/header', { title: 'Edit Book' }) %>
+
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="mb-0">Edit Book</h4>
+      </div>
+      <div class="card-body">
+        <form action="/books/<%= book.id %>?_method=PUT" method="POST">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" value="<%= book.title %>" required>
+          </div>
+          <div class="mb-3">
+            <label for="authorId" class="form-label">Author</label>
+            <select class="form-select" id="authorId" name="authorId" required>
+              <option value="">Select Author</option>
+              <% authors.forEach(author => { %>
+                <option value="<%= author.id %>" <%= book.authorId === author.id ? 'selected' : '' %>><%= author.name %></option>
+              <% }); %>
+            </select>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="isbn" class="form-label">ISBN</label>
+              <input type="text" class="form-control" id="isbn" name="isbn" value="<%= book.isbn %>">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="publicationYear" class="form-label">Publication Year</label>
+              <input type="number" class="form-control" id="publicationYear" name="publicationYear" value="<%= book.publicationYear %>">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Update Book</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
