@@ -4,6 +4,7 @@ const { Book, Author } = require('../models');
 class BooksController extends BaseController {
   constructor() {
     super(Book);
+    console.log('Controller initialized with model:', this.model?.name); 
   }
 
   // Override newForm to include authors
@@ -45,4 +46,4 @@ class BooksController extends BaseController {
   }
 }
 
-module.exports = new BaseController(Book);
+module.exports = new BooksController();

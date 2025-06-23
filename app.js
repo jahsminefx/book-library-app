@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const flash = require('connect-flash');
 const path = require('path');
+const methodOverride = require('method-override');
 const sequelize = require('./config/database');
 const { User, Author, Book } = require('./models');
 
@@ -11,6 +12,7 @@ const app = express();
 // Middleware setup
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Session configuration
@@ -63,11 +65,18 @@ app.get('/', async (req, res) => {
 });
 
 // Import routes
+const adminRoutes = require('./routes/admin');
 const authRoutes = require('./routes/auth');
 const bookRoutes = require('./routes/books');
 const authorRoutes = require('./routes/authors');
 
+const test = async () => {
+  const users = await User.findAll();
+  console.log(users.map(u => ({id: u.id, username: u.username})));
+};
+test();
 // Use routes
+app.use('/admin', adminRoutes);
 app.use('/auth', authRoutes);
 app.use('/books', bookRoutes);
 app.use('/authors', authorRoutes);
