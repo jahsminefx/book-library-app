@@ -1,52 +1,48 @@
 <%- include('../partials/header', { title: item.title }) %>
 
-  <div class="row">
-    <div class="col-md-8">
-      <div class="card mb-4">
-        <div class="card-body">
-          <h2 class="card-title">
-            <%= item.title %>
-          </h2>
-          <h5 class="card-subtitle mb-3 text-muted">
-            by <%= item.Author ? item.Author.name : 'Unknown' %>
-              <% if (item.publicationYear) { %>
-                (<%= item.publicationYear %>)
-                  <% } %>
-          </h5>
+<div class="page-header">
+  <div>
+    <p class="page-kicker">Book Details</p>
+    <h1 class="page-title"><%= item.title %></h1>
+    <p class="page-subtitle">by <%= item.Author ? item.Author.name : 'Unknown Author' %></p>
+  </div>
+  <a href="/books" class="btn btn-outline-primary">Back to Books</a>
+</div>
 
-          <% if (item.isbn) { %>
-            <p class="card-text"><strong>ISBN:</strong>
-              <%= item.isbn %>
-            </p>
-            <% } %>
-
-              <% if (user && user.role==='admin' ) { %>
-                <div class="mt-4">
-                  <a href="/books/<%= item.id %>/edit" class="btn btn-warning me-2">Edit</a>
-                  <form action="/books/<%= item.id %>?_method=DELETE" method="POST" class="d-inline">
-                    <button type="submit" class="btn btn-delete"
-                      onclick="return confirm('Are you sure you want to delete this book? This action cannot be undone.')">Delete</button>
-                  </form>
-                </div>
-                <% } %>
-        </div>
+<div class="row g-4">
+  <div class="col-lg-8">
+    <section class="card detail-panel">
+      <div class="d-flex flex-wrap gap-2 mb-4">
+        <span class="meta-pill">Published <%= item.publicationYear || 'N/A' %></span>
+        <span class="meta-pill">ISBN <%= item.isbn || 'N/A' %></span>
       </div>
-    </div>
-    <div class="col-md-4">
-      <% if (item.Author && item.Author.bio) { %>
-        <div class="card">
-          <div class="card-header">
-            <h5>About the Author</h5>
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-              <%= item.Author.bio %>
-            </p>
-            <a href="/authors/<%= item.Author.id %>" class="btn btn-sm btn-outline-primary">View Author</a>
-          </div>
+
+      <h2 class="h5 mb-3">Description</h2>
+      <p class="mb-0 text-muted"><%= item.description || 'No description available for this book.' %></p>
+
+      <% if (user && user.role === 'admin') { %>
+        <div class="d-flex flex-wrap gap-2 mt-4">
+          <a href="/books/<%= item.id %>/edit" class="btn btn-warning">Edit Book</a>
+          <form action="/books/<%= item.id %>?_method=DELETE" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this book? This action cannot be undone.')">Delete</button>
+          </form>
         </div>
-        <% } %>
-    </div>
+      <% } %>
+    </section>
   </div>
 
-  <%- include('../partials/footer') %>
+  <div class="col-lg-4">
+    <aside class="card detail-panel">
+      <h2 class="h5 mb-3">Author</h2>
+      <% if (item.Author) { %>
+        <p class="fw-bold mb-1"><%= item.Author.name %></p>
+        <p class="text-muted"><%= item.Author.bio || 'No author bio available.' %></p>
+        <a href="/authors/<%= item.Author.id %>" class="btn btn-sm btn-outline-primary">View Author</a>
+      <% } else { %>
+        <p class="text-muted mb-0">No author is assigned to this book.</p>
+      <% } %>
+    </aside>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

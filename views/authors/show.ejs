@@ -1,23 +1,26 @@
 <%- include('../partials/header', { title: item.name }) %>
 
-<div class="row">
-  <div class="col-md-8">
-    <div class="card mb-4">
-      <div class="card-body">
-        <h2 class="card-title"><%= item.name %></h2>
-        <p class="card-text"><%= item.bio || 'No bio available.' %></p>
-
-        <% if (user && user.role === 'admin') { %>
-          <div class="mt-4">
-            <a href="/authors/<%= item.id %>/edit" class="btn btn-warning me-2">Edit</a>
-            <form action="/authors/<%= item.id %>?_method=DELETE" method="POST" class="d-inline">
-              <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this author?')">Delete</button>
-            </form>
-          </div>
-        <% } %>
-      </div>
-    </div>
+<div class="page-header">
+  <div>
+    <p class="page-kicker">Author Details</p>
+    <h1 class="page-title"><%= item.name %></h1>
+    <p class="page-subtitle">Author profile and catalogue attribution.</p>
   </div>
+  <a href="/authors" class="btn btn-outline-primary">Back to Authors</a>
 </div>
+
+<section class="card detail-panel">
+  <h2 class="h5 mb-3">Biography</h2>
+  <p class="text-muted mb-0"><%= item.bio || 'No bio available for this author.' %></p>
+
+  <% if (user && user.role === 'admin') { %>
+    <div class="d-flex flex-wrap gap-2 mt-4">
+      <a href="/authors/<%= item.id %>/edit" class="btn btn-warning">Edit Author</a>
+      <form action="/authors/<%= item.id %>?_method=DELETE" method="POST" class="d-inline">
+        <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this author?')">Delete</button>
+      </form>
+    </div>
+  <% } %>
+</section>
 
 <%- include('../partials/footer') %>
