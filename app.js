@@ -53,8 +53,8 @@ app.use((req, res, next) => {
 // Home page: show list of books
 app.get('/', async (req, res) => {
   try {
-    const books = await Book.findAll(); // ✅ fetch books from DB
-    res.render('index', { title: 'Book Library', books }); // ✅ pass books to EJS
+    const books = await Book.findAll({ include: Author });
+    res.render('index', { title: 'Book Library', books });
   } catch (err) {
     console.error(err);
     res.status(500).render('errors/error', {
@@ -70,11 +70,7 @@ const authRoutes = require('./routes/auth');
 const bookRoutes = require('./routes/books');
 const authorRoutes = require('./routes/authors');
 
-const test = async () => {
-  const users = await User.findAll();
-  console.log(users.map(u => ({id: u.id, username: u.username})));
-};
-test();
+
 // Use routes
 app.use('/admin', adminRoutes);
 app.use('/auth', authRoutes);
@@ -91,10 +87,10 @@ app.use((req, res, next) => {
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  
+
   // Set default status code
   const statusCode = err.status || 500;
-  
+
   // Format the error response
   res.status(statusCode).render('errors/error', {
     error: process.env.NODE_ENV === 'development' ? err : { message: 'Something went wrong!' },

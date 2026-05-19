@@ -1,0 +1,39 @@
+<%- include('../partials/header', { title: 'Authors' }) %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Authors</h2>
+  <% if (user && user.role === 'admin') { %>
+    <a href="/authors/new" class="btn btn-success">Add New Author</a>
+  <% } %>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Bio</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% items.forEach(author => { %>
+        <tr>
+          <td><%= author.name %></td>
+          <td><%= author.bio || 'No bio available.' %></td>
+          <td>
+            <a href="/authors/<%= author.id %>" class="btn btn-sm btn-info">View</a>
+            <% if (user && user.role === 'admin') { %>
+              <a href="/authors/<%= author.id %>/edit" class="btn btn-sm btn-warning">Edit</a>
+              <form action="/authors/<%= author.id %>?_method=DELETE" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-sm btn-delete" onclick="return confirm('Are you sure you want to delete this author?')">Delete</button>
+              </form>
+            <% } %>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>

@@ -10,7 +10,7 @@ Author.hasMany(Book, { foreignKey: 'authorId' });
 Book.belongsTo(Author, { foreignKey: 'authorId' });
 async function initializeDatabase() {
   try {
-    await sequelize.sync({ force: true }); // Set force: false if you don't want to drop tables
+    await sequelize.sync({ force: false }); // Set force: false if you don't want to drop tables
     console.log('Database & tables created!');
     return true;
   } catch (error) {

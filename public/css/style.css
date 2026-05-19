@@ -1,5 +1,3 @@
-Solo Leveling style
-
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -8,8 +6,11 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3 {
-  color: #ffdd57;
+h1,
+h2,
+h3,
+h4 {
+  color: #251e01;
 }
 
 a {
@@ -23,9 +24,50 @@ a:hover {
 
 .container {
   width: 90%;
-  max-width: 1000px;
+  max-width: 1200px;
+  /* Increased max-width */
   margin: auto;
   padding: 20px;
+}
+
+/* Card Styling */
+.book-card {
+  background-color: #ffffff;
+  border: 1px solid #333;
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 100%;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border-color: #57a6ff;
+}
+
+.book-card .card-body {
+  color: #ddd;
+}
+
+.book-card .card-title {
+  color: #000000;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.book-card .card-subtitle {
+  color: #000000;
+  font-size: 0.9rem;
+}
+
+/* Button Styling Override */
+.btn-primary {
+  background-color: #57a6ff;
+  border-color: #57a6ff;
+}
+
+.btn-primary:hover {
+  background-color: #3a8fdc;
+  border-color: #3a8fdc;
 }
 
 /* Role selector styling */
@@ -38,40 +80,57 @@ a:hover {
 /* Table improvements */
 .table {
   margin-top: 20px;
+  color: #fff;
+  /* Ensure text is visible */
 }
 
-.table td, .table th {
+.table td,
+.table th {
   vertical-align: middle;
+  border-color: #333;
 }
 
-form {
+form:not(.d-inline) {
   background-color: #111122;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
-input, textarea, button {
+input,
+textarea,
+select {
   width: 100%;
   padding: 10px;
   margin: 8px 0;
-  border: none;
-  border-radius: 4px; 
+  border: 1px solid #444;
+  border-radius: 4px;
   font-size: 16px;
-}
-
-input, textarea {
   background-color: #222233;
   color: #fff;
 }
 
-button {
-  background-color: #57a6ff;
-  color: #000;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #57a6ff;
+  box-shadow: 0 0 5px rgba(87, 166, 255, 0.5);
 }
 
-button:hover {
-  background-color: #1e90ff;
+.btn-delete {
+  background-color: #ff4d4d !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0.375rem 0.75rem;
+  /* Match Bootstrap sm padding if needed, or rely on btn class */
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-delete:hover {
+  background-color: #cc0000 !important;
+  transform: translateY(-2px);
 }

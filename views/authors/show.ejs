@@ -1,0 +1,23 @@
+<%- include('../partials/header', { title: item.name }) %>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h2 class="card-title"><%= item.name %></h2>
+        <p class="card-text"><%= item.bio || 'No bio available.' %></p>
+
+        <% if (user && user.role === 'admin') { %>
+          <div class="mt-4">
+            <a href="/authors/<%= item.id %>/edit" class="btn btn-warning me-2">Edit</a>
+            <form action="/authors/<%= item.id %>?_method=DELETE" method="POST" class="d-inline">
+              <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this author?')">Delete</button>
+            </form>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

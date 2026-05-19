@@ -1,16 +1,8 @@
-<!-- <%- include('../partials/header') %>
+<%- include('../partials/header', { title: 'User Management' }) %>
 
 <div class="container mt-4">
   <h2>User Management</h2>
   
-  <% if (success_msg.length > 0) { %>
-    <div class="alert alert-success"><%= success_msg %></div>
-  <% } %>
-  
-  <% if (error_msg.length > 0) { %>
-    <div class="alert alert-danger"><%= error_msg %></div>
-  <% } %>
-
   <table class="table table-striped">
     <thead>
       <tr>
@@ -38,11 +30,7 @@
           </td>
           <td><%= user.createdAt.toLocaleDateString() %></td>
           <td>
-            <a href="/admin/users/<%= user.id %>/delete" 
-               class="btn btn-sm btn-danger"
-               onclick="return confirm('Delete this user permanently?')">
-              Delete
-            </a>
+            <span class="text-muted">-</span>
           </td>
         </tr>
       <% }) %>
@@ -50,4 +38,4 @@
   </table>
 </div>
 
-<%- include('../partials/footer') %> -->
+<%- include('../partials/footer') %>

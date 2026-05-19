@@ -12,6 +12,7 @@
             <label for="title" class="form-label">Title</label>
             <input type="text" class="form-control" id="title" name="title" value="<%= book.title %>" required>
           </div>
+
           <div class="mb-3">
             <label for="authorId" class="form-label">Author</label>
             <select class="form-select" id="authorId" name="authorId" required>
@@ -21,17 +22,25 @@
               <% }); %>
             </select>
           </div>
+
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="isbn" class="form-label">ISBN</label>
-              <input type="text" class="form-control" id="isbn" name="isbn" value="<%= book.isbn %>">
+              <input type="text" class="form-control" id="isbn" name="isbn" value="<%= book.isbn || '' %>">
             </div>
             <div class="col-md-6 mb-3">
               <label for="publicationYear" class="form-label">Publication Year</label>
-              <input type="number" class="form-control" id="publicationYear" name="publicationYear" value="<%= book.publicationYear %>">
+              <input type="number" class="form-control" id="publicationYear" name="publicationYear" value="<%= book.publicationYear || '' %>">
             </div>
           </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3"><%= book.description || '' %></textarea>
+          </div>
+
           <button type="submit" class="btn btn-primary">Update Book</button>
+          <a href="/books/<%= book.id %>" class="btn btn-secondary">Cancel</a>
         </form>
       </div>
     </div>
